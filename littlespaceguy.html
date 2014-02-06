@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<body>
+<body id="mainBody">
 
 <h1>Little Space Guy</h1>
 <img id="imgLittleSpaceGuy" width="400" height="300">
@@ -8,6 +8,7 @@
 <p id="labelCurrentPhase"></p>
 <button id="buttonLife" type="button" onclick="Life()">Begin Life</button>
 <button id="buttonFeed" type="button" onclick="Feed()" style="visibility:hidden">Feed</button>
+<button id="buttonPlay" type="button" onclick="Play()" style="visibility:hidden">Play</button>
 
 <script>
 var uCurrentPhase=1;
@@ -15,8 +16,12 @@ var uLifeSpan=0;
 
 function Life()
 {
-  document.getElementById("buttonLife").style.visibility="hidden";
+  var mainBody = document.getElementById("mainBody");
+  var lifeButton = document.getElementById("buttonLife");
+  mainBody.removeChild(lifeButton);
+  
   document.getElementById("buttonFeed").style.visibility="visible";
+  document.getElementById("buttonPlay").style.visibility="visible";
   
   DisplayCurrentPhase();
   IncreaseLifeSpan();
@@ -68,6 +73,11 @@ function Feed()
 {
   document.getElementById("imgLittleSpaceGuy").src="Feeding.gif";
   setTimeout(DisplayCurrentPhase(),3000);
+}
+
+function Play()
+{
+  alert("Thanks for playing!");
 }
 </script>
 
