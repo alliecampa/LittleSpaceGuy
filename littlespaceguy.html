@@ -1,85 +1,120 @@
 <!DOCTYPE html>
 <html>
-<body id="mainBody">
+  <head>
+    <title>Little Space Guy</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+  </head>
 
-<h1>Little Space Guy</h1>
-<img id="imgLittleSpaceGuy" width="400" height="300">
-<p id="labelLifeSpan"></p>
-<p id="labelCurrentPhase"></p>
-<button id="buttonLife" type="button" onclick="Life()">Begin Life</button>
-<button id="buttonFeed" type="button" onclick="Feed()" style="visibility:hidden">Feed</button>
-<button id="buttonPlay" type="button" onclick="Play()" style="visibility:hidden">Play</button>
-
-<script>
-var uCurrentPhase=1;
-var uLifeSpan=0;
-
-function Life()
-{
-  var mainBody = document.getElementById("mainBody");
-  var lifeButton = document.getElementById("buttonLife");
-  mainBody.removeChild(lifeButton);
+  <body id="mainBody">
   
-  document.getElementById("buttonFeed").style.visibility="visible";
-  document.getElementById("buttonPlay").style.visibility="visible";
+    <div id="startPanel" class="panel panel-primary">
+      <div id="startPanelHeader" class="panel-heading">
+        <h3 class="panel-title">Little Space Guy</h3>
+      </div>
+      <div id="startPanelBody" class="panel-body">
+        <button id="buttonLife" type="button" class="btn btn-sm btn-primary" onclick="Life()">Begin Life</button>
+      </div>
+    </div>
   
-  DisplayCurrentPhase();
-  IncreaseLifeSpan();
+    <div id="mainPanel" class="panel panel-primary" style="visibility:hidden">
+      <div id="mainPanelHeader" class="panel-heading">
+        <h3 class="panel-title">Little Space Guy</h3>
+      </div>
+      <div id="mainPanelBody" class="panel-body">
+        <img id="imgLittleSpaceGuy" width="400" height="300">
+
+        <p id="labelLifeSpan" class="bg-success"></p>
+        
+        <p id="labelCurrentPhase" class="bg-success"></p>
+      
+        <div class="progress">
+          <div id="lifeProgress" class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"></div>
+        </div>
+        
+        <br>
+
+        <button id="buttonFeed" type="button" class="btn btn-sm btn-info" onclick="Feed()">Feed</button>
+        <button id="buttonPlay" type="button" class="btn btn-sm btn-info" onclick="Play()">Play</button>
+      </div>
+    </div>
   
-  // Increase the life of the little space guy every 5 seconds
-  setInterval(function(){Evolve()},5000);
-  
-  setInterval(function(){IncreaseLifeSpan()},1000);
-  
-}
 
-function IncreaseLifeSpan()
-{
-  uLifeSpan = uLifeSpan + 1;
-  document.getElementById("labelLifeSpan").innerHTML = "Current lifespan: " + uLifeSpan;
-}
+  <script>
+    var uCurrentPhase=1;
+    var uLifeSpan=0;
 
-function Evolve()
-{
-  if ( 4 > uCurrentPhase )
-  {
-    uCurrentPhase = uCurrentPhase + 1;
-    DisplayCurrentPhase();
-  }
-}
+    function Life()
+    {
+      var mainBody = document.getElementById("mainBody");
+      var startPanel = document.getElementById("startPanel");
 
-function DisplayCurrentPhase()
-{
-  switch (uCurrentPhase)
-  {
-    case 1:
-      document.getElementById("imgLittleSpaceGuy").src="PhaseOne.gif";
-      break;
-    case 2:
-      document.getElementById("imgLittleSpaceGuy").src="PhaseTwo.gif";
-      break;
-    case 3:
-      document.getElementById("imgLittleSpaceGuy").src="PhaseThree.gif";
-      break;
-    case 4:
-      document.getElementById("imgLittleSpaceGuy").src="PhaseFour.gif";
-      break;
-  }
-  
-  document.getElementById("labelCurrentPhase").innerHTML = "Current Phase: " + uCurrentPhase;
-}
+      mainBody.removeChild(startPanel);
+            
+      document.getElementById("mainPanel").style.visibility="visible";
+      
+      DisplayCurrentPhase();
+      IncreaseLifeSpan();
+      
+      // Increase the life of the little space guy every 5 seconds
+      setInterval(function(){Evolve()},5000);
+      
+      setInterval(function(){IncreaseLifeSpan()},1000);
+    }
 
-function Feed()
-{
-  document.getElementById("imgLittleSpaceGuy").src="Feeding.gif";
-  setTimeout(DisplayCurrentPhase(),3000);
-}
+    function IncreaseLifeSpan()
+    {
+      uLifeSpan = uLifeSpan + 1;
+      document.getElementById("labelLifeSpan").innerHTML = "Current lifespan: " + uLifeSpan;
+    }
 
-function Play()
-{
-  alert("Thanks for playing!");
-}
-</script>
+    function Evolve()
+    {
+      if ( 4 > uCurrentPhase )
+      {
+        uCurrentPhase = uCurrentPhase + 1;
+        DisplayCurrentPhase();
+      }
+    }
 
-</body>
+    function DisplayCurrentPhase()
+    {
+      switch (uCurrentPhase)
+      {
+        case 1:
+          document.getElementById("imgLittleSpaceGuy").src="images/PhaseOne.gif";
+          break;
+        case 2:
+          document.getElementById("imgLittleSpaceGuy").src="images/PhaseTwo.gif";
+          break;
+        case 3:
+          document.getElementById("imgLittleSpaceGuy").src="images/PhaseThree.gif";
+          break;
+        case 4:
+          document.getElementById("imgLittleSpaceGuy").src="images/PhaseFour.gif";
+          break;
+      }
+      
+      document.getElementById("labelCurrentPhase").innerHTML = "Current Phase: " + uCurrentPhase;
+    }
+
+    function Feed()
+    {
+      document.getElementById("imgLittleSpaceGuy").src="Feeding.gif";
+      setTimeout(DisplayCurrentPhase(),3000);
+    }
+
+    function Play()
+    {
+      alert("Thanks for playing!");
+    }
+    </script>
+    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- <script src="js/bootstrap.min.js"></script> -->
+  </body>
 </html> 
